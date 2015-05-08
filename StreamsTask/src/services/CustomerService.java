@@ -1,7 +1,9 @@
 package services;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import entities.Customer;
 import entities.Product;
@@ -56,8 +58,20 @@ public class CustomerService implements CustomerServiceInterface {
 
 	@Override
 	public double avgOrders(boolean includeEmpty) {
-		// TODO Auto-generated method stub
-		return 0;
+		Stream<Customer> customerz = customers.stream();
+		if(!includeEmpty){
+			customerz = customerz.filter((c) -> !c.getBoughtProducts().isEmpty());
+		}
+		
+		try {
+			return customerz
+					.mapToInt((c) -> c.getBoughtProducts().size())
+					.average().getAsDouble();
+		}
+		catch(NoSuchElementException e){
+			return 0;
+		}
+		
 	}
 
 	@Override

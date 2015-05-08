@@ -12,6 +12,7 @@ import entities.Customer;
 import entities.Product;
 
 public class CustomerServiceTests {
+	private static final double DELTA = 1e-15;
 
 	@Test
 	public void testFindByName() {
@@ -91,6 +92,34 @@ public class CustomerServiceTests {
 		
 		assertNotNull("Result can't be null", customers);
 		assertEquals(0, customers.size());
+		
+	}
+	
+	@Test
+	public void testAvgOrders() {
+		CustomerServiceInterface cs = new CustomerService(DataProducer.getTestData(10));
+		
+		Double res = cs.avgOrders(true);
+		
+		assertNotNull("Result can't be null", res);
+		assertEquals(2.8, res, DELTA);
+		
+		Double res2 = cs.avgOrders(false);
+		
+		assertNotNull("Result can't be null", res2);
+		assertEquals(4, res2, DELTA);
+		
+		CustomerServiceInterface cs2 = new CustomerService(DataProducer.getTestDataWithNoProducts(10));
+
+		Double res3 = cs2.avgOrders(true);
+		
+		assertNotNull("Result can't be null", res3);
+		assertEquals(0, res3, DELTA);
+		
+		Double res4 = cs2.avgOrders(false);
+		
+		assertNotNull("Result can't be null", res4);
+		assertEquals(0, res4, DELTA);
 		
 	}
 	
