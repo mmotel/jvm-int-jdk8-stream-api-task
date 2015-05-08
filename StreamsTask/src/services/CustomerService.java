@@ -29,8 +29,9 @@ public class CustomerService implements CustomerServiceInterface {
 
 	@Override
 	public List<Customer> customersWhoBoughtMoreThan(int number) {
-		// TODO Auto-generated method stub
-		return null;
+		return customers.stream()
+				.filter((c) -> c.getBoughtProducts().size() > number)
+				.collect(Collectors.toList());
 	}
 
 	@Override
