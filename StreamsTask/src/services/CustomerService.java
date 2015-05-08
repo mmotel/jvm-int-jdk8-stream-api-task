@@ -36,8 +36,10 @@ public class CustomerService implements CustomerServiceInterface {
 
 	@Override
 	public List<Customer> customersWhoSpentMoreThan(double price) {
-		// TODO Auto-generated method stub
-		return null;
+		return customers.stream()
+				.filter((c) -> c.getBoughtProducts().stream().
+						mapToDouble(Product::getPrice).sum() > price )
+				.collect(Collectors.toList());
 	}
 
 	@Override
