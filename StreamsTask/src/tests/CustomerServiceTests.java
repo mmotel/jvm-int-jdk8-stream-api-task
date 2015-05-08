@@ -9,6 +9,7 @@ import org.junit.Test;
 import services.CustomerService;
 import services.CustomerServiceInterface;
 import entities.Customer;
+import entities.Product;
 
 public class CustomerServiceTests {
 
@@ -75,6 +76,21 @@ public class CustomerServiceTests {
 		
 		assertNotNull("Result can't be null", res);
 		assertEquals(3, res.size());
+		
+	}
+	
+	@Test
+	public void testAddProductToAllCustomers() {
+		CustomerServiceInterface cs = new CustomerService(DataProducer.getTestDataWithNoProducts(10));
+		
+		Product p = new Product(101, "Some Product", 101);
+		
+		cs.addProductToAllCustomers(p);
+		
+		List<Customer> customers = cs.customersWithNoOrders();
+		
+		assertNotNull("Result can't be null", customers);
+		assertEquals(0, customers.size());
 		
 	}
 	

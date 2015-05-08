@@ -23,4 +23,14 @@ public class DataProducer {
 		return result;
 
 	}
+
+	public static List<Customer> getTestDataWithNoProducts(int count) {
+		List<Customer> result = new ArrayList<>();
+
+		for (int i = 0; i < count; i++) {
+			Customer c = new Customer(i, "Customer: " + i);
+			result.add(c);
+		}
+		return result;
+	}
 }

@@ -51,8 +51,7 @@ public class CustomerService implements CustomerServiceInterface {
 
 	@Override
 	public void addProductToAllCustomers(Product p) {
-		// TODO Auto-generated method stub
-
+		customers.stream().forEach((c) -> c.addProduct(p));
 	}
 
 	@Override
