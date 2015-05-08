@@ -1,4 +1,3 @@
-streams
-=======
+# JVM Internals: Java JDK8 StreamAPI Task
 
-Streams API task for JVM Internals class
+Streams API task form JVM Internals class
