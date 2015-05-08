@@ -67,5 +67,16 @@ public class CustomerServiceTests {
 		
 	}
 	
+	@Test
+	public void testCustomersWithNoOrders() {
+		CustomerServiceInterface cs = new CustomerService(DataProducer.getTestData(10));
+		
+		List<Customer> res = cs.customersWithNoOrders();
+		
+		assertNotNull("Result can't be null", res);
+		assertEquals(3, res.size());
+		
+	}
+	
 
 }
