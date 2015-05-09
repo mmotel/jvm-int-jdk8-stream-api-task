@@ -123,5 +123,25 @@ public class CustomerServiceTests {
 		
 	}
 	
+	@Test
+	public void testWasProductBought() {
+		CustomerServiceInterface cs = new CustomerService(DataProducer.getTestData(10));
+		
+		Product p = new Product(4, "Product: 4", 0.4);
+		
+		boolean res = cs.wasProductBought(p);
+		
+		assertNotNull("Result can't be null", res);
+		assertEquals(true, res);
+		
+		Product p2 = new Product(11, "Product: 11", 1.1);
+		
+		boolean res2 = cs.wasProductBought(p2);
+		
+		assertNotNull("Result can't be null", res2);
+		assertEquals(false, res2);
+		
+	}
+	
 
 }

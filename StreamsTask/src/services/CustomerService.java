@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -76,8 +77,10 @@ public class CustomerService implements CustomerServiceInterface {
 
 	@Override
 	public boolean wasProductBought(Product p) {
-		// TODO Auto-generated method stub
-		return false;
+		List<Product> products = new ArrayList<Product>();
+		customers.stream().map(Customer::getBoughtProducts).
+			forEach(products::addAll);
+		return products.stream().anyMatch((bp) -> bp.getId()==p.getId());
 	}
 
 	@Override
