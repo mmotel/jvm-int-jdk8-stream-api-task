@@ -187,5 +187,20 @@ public class CustomerServiceTests {
 		
 	}
 	
+	@Test
+	public void testCountCustomersWhoBought() {
+		CustomerServiceInterface cs = new CustomerService(DataProducer.getTestDataWithNoProducts(10));
+		
+		Product p  = new Product(20, "Product: 20", 2);
+		Product p2 = new Product(22, "Product: 22", 2.2);
+		
+		cs.addProductToAllCustomers(p);
+		
+		int count = cs.countBuys(p);
+		int count2 = cs.countBuys(p2);
+		
+		assertEquals(10, count);
+		assertEquals(0, count2);
+	}
 
 }
