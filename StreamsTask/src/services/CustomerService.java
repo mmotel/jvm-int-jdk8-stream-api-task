@@ -2,7 +2,9 @@ package services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -85,8 +87,31 @@ public class CustomerService implements CustomerServiceInterface {
 
 	@Override
 	public List<Product> mostPopularProduct() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Product> products = new ArrayList<Product>();
+		customers.stream().map(Customer::getBoughtProducts).
+			forEach(products::addAll);
+		
+		Map<Integer, List<Product>> grouppedProducts = products.stream().
+			collect(Collectors.groupingBy(Product::getId));
+		
+		List<Integer> sizes = new ArrayList<Integer>();
+		grouppedProducts.forEach((i, l) -> sizes.add(l.size()));
+		
+		Optional<Integer> maxSize = sizes.stream().max(Integer::compare);
+		
+		if(!maxSize.isPresent()){
+			return null;	
+		}
+		else {
+			List<Product> res = new ArrayList<Product>();
+			grouppedProducts.forEach((i, l) -> {
+				if(l.size()==maxSize.get()) {
+					res.add(l.get(0));
+				}
+			});
+			return res;
+		}
+		
 	}
 
 	@Override

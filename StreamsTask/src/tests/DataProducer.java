@@ -33,4 +33,15 @@ public class DataProducer {
 		}
 		return result;
 	}
+
+	public static List<Customer> getTestDataWithProducts(int count) {
+		List<Customer> result = new ArrayList<>();
+
+		for (int i = 0; i < count; i++) {
+			Customer c = new Customer(i, "Customer: " + i);
+			c.addProduct(new Product(i, "Product: " + i, (double) i * 0.1));
+			result.add(c);
+		}
+		return result;
+	}
 }

@@ -2,6 +2,7 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
@@ -140,6 +141,32 @@ public class CustomerServiceTests {
 		
 		assertNotNull("Result can't be null", res2);
 		assertEquals(false, res2);
+		
+	}
+	
+	@Test
+	public void testMostPopularProduct() {
+		CustomerServiceInterface cs = new CustomerService(DataProducer.getTestDataWithProducts(10));
+		
+		Product p  = new Product(20, "Product: 20", 2);
+		Product p2 = new Product(22, "Product: 22", 2.2);
+		
+		for(int i = 0; i < 5; i+=1){
+			cs.addProductToAllCustomers(p);
+		}
+		List<Product> products = new ArrayList<Product>();
+		products.add(p);
+		List<Product> mostPopularProduct = cs.mostPopularProduct();
+		
+		assertTrue(mostPopularProduct.containsAll(products));
+		
+		for(int i = 0; i < 5; i+=1){
+			cs.addProductToAllCustomers(p2);
+		}
+		products.add(p2);
+		List<Product> mostPopularProduct2 = cs.mostPopularProduct();
+		
+		assertTrue(mostPopularProduct2.containsAll(products));
 		
 	}
 	
