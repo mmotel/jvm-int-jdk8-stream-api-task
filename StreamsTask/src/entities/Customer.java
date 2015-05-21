@@ -43,6 +43,9 @@ public class Customer {
 	public Customer(int id, String name) {
 		this.id = id;
 		this.name = name;
+		this.email = name.replace(" ", "_") + "@server.domain";
+		this.phoneNo = ((Integer)(500600700 + id)).toString();
+		this.taxId = ((Integer) (1000000000 + id)).toString(); 
 		this.boughtProducts = new ArrayList<>();
 	}
 

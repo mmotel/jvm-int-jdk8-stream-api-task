@@ -28,8 +28,13 @@ public class CustomerService implements CustomerServiceInterface {
 
 	@Override
 	public List<Customer> findByField(String fieldName, Object value) {
-		// TODO Auto-generated method stub
-		return null;
+		return customers.stream().filter( (c) -> 
+			((fieldName.compareTo("id")     == 0) ? c.getId()      ==(int)value                : false) ||
+			((fieldName.compareTo("name")   == 0) ? c.getName().   compareTo((String)value)==0 : false) ||
+			((fieldName.compareTo("email")  == 0) ? c.getEmail().  compareTo((String)value)==0 : false) ||
+			((fieldName.compareTo("phoneNo")== 0) ? c.getPhoneNo().compareTo((String)value)==0 : false) ||
+			((fieldName.compareTo("taxId")  == 0) ? c.getTaxId().  compareTo((String)value)==0 : false)
+		).collect(Collectors.toList());
 	}
 
 	@Override

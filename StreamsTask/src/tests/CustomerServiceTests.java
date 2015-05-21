@@ -33,6 +33,41 @@ public class CustomerServiceTests {
 		assertEquals(0, res2.size());
 		
 	}
+	
+	@Test
+	public void testFindByField(){
+		CustomerServiceInterface cs = new CustomerService(DataProducer.getTestData(10));
+		Customer c = new Customer(1, "Customer: " + 1);
+		
+		List<Customer> foundCustomers = cs.findByField("id", c.getId());
+		
+		assertEquals(1, foundCustomers.size());
+		assertEquals(c.getId(), foundCustomers.get(0).getId());
+		
+		foundCustomers = cs.findByField("name", c.getName());
+		
+		assertEquals(1, foundCustomers.size());
+		assertEquals(c.getId(), foundCustomers.get(0).getId());
+		assertEquals(c.getName(), foundCustomers.get(0).getName());
+		
+		foundCustomers = cs.findByField("email", c.getEmail());
+		
+		assertEquals(1, foundCustomers.size());
+		assertEquals(c.getId(), foundCustomers.get(0).getId());
+		assertEquals(c.getEmail(), foundCustomers.get(0).getEmail());
+
+		foundCustomers = cs.findByField("phoneNo", c.getPhoneNo());
+		
+		assertEquals(1, foundCustomers.size());
+		assertEquals(c.getId(), foundCustomers.get(0).getId());
+		assertEquals(c.getPhoneNo(), foundCustomers.get(0).getPhoneNo());
+		
+		foundCustomers = cs.findByField("taxId", c.getTaxId());
+		
+		assertEquals(1, foundCustomers.size());
+		assertEquals(c.getId(), foundCustomers.get(0).getId());
+		assertEquals(c.getTaxId(), foundCustomers.get(0).getTaxId());		
+	}
 
 	@Test
 	public void testCustomersWhoBoughtMoreThan() {
@@ -158,6 +193,7 @@ public class CustomerServiceTests {
 		products.add(p);
 		List<Product> mostPopularProduct = cs.mostPopularProduct();
 		
+		assertEquals(1, mostPopularProduct.size());
 		assertTrue(mostPopularProduct.containsAll(products));
 		
 		for(int i = 0; i < 5; i+=1){
@@ -166,6 +202,7 @@ public class CustomerServiceTests {
 		products.add(p2);
 		List<Product> mostPopularProduct2 = cs.mostPopularProduct();
 		
+		assertEquals(2, mostPopularProduct2.size());
 		assertTrue(mostPopularProduct2.containsAll(products));
 		
 	}
